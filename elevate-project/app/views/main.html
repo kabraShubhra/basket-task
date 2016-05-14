@@ -1,0 +1,40 @@
+<div class="row basket-head">
+  <h1>Your Basket</h1>
+  <p> Items added to your basket are shown below.</p>
+  <p> Adjust the quantities or remove items before continuing your purchase. </p>
+</div> 
+<div class="row basket-content">
+
+   <table class="basket-table">
+    <tr class="basket-row">
+      <th>Products</th>
+      <th>Price</th>
+      <th>Qyt</th>
+      <th>Cost</th>
+    </tr>
+    <tr ng-repeat="product in main.Products" id='{{product.id}}'>
+      <td>{{product.name}}, {{product.size}}</td>
+      <td>{{product.price|currency}}</td>
+      <td class='qty-col'> <label id='lbl_quantity' for = 'quantity' class='hide'>  </label> <input id='quantity' type='text' class='basket-qty' ng-model='product.quantity' readonly aria-labelledby= 'lbl_quantity' /> <span class="actionButtons"> <button ng-click='main.increment(product)'>+</button> <button ng-click='main.decrement(product)'>-</button> </span> </td>
+      <td >{{product.price * product.quantity|currency}} </td>
+      <td> <span class="glyphicon glyphicon-trash" ng-click="main.deleteItem($index)"></span></td>
+    </tr>
+    <tr class='subTotal'>
+      <td>Subtotal</td>
+      <td colspan="3" class="text-right">{{main.subtotal|currency}}</td>
+    </tr> 
+
+    <tr class='vatTotal'>
+      <td>Vat @20%</td>
+      <td colspan="3" class="text-right">  {{main.subtotal *0.2 |currency}} </td>
+    </tr>
+    <tr class='costTotal'>
+      <td>Total Cost</td>
+      <td colspan="3" class="text-right"> {{main.subtotal + main.subtotal *0.2 |currency}}</td>
+    </tr> 
+  </table>
+  <div class='buyNow'>
+   <button class='buyNowButton'> Buy Now >> </button>
+  </div> 
+</div> 
+
